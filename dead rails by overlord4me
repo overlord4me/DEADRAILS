@@ -1,0 +1,379 @@
+-- Dead Rails AutoScriptV2
+-- Coded by overlord4me 
+-- Features: Auto Farm, Auto Shop/Sell, Fast Reload/Fire, Auto Heal, Infinite Jump, Speed Hack, Noclip, Full ESP, GUI
+
+-- Initialize variables
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+local camera = game.Workspace.CurrentCamera
+local runService = game:GetService("RunService")
+local tweenService = game:GetService("TweenService")
+local uis = game:GetService("UserInputService")
+local rs = game:GetService("ReplicatedStorage")
+local ts = game:GetService("TweenService")
+local httpService = game:GetService("HttpService")
+local guiEnabled = true
+local espEnabled = true
+local autoFarmEnabled = true
+local speedEnabled = false
+local noclipEnabled = false
+local infiniteJumpEnabled = false
+local fastReloadEnabled = false
+local autoHealEnabled = false
+local esp = {}
+
+-- Create GUI
+local function createGUI()
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = player.PlayerGui
+    screenGui.Name = "AutoScriptGUI"
+    screenGui.ResetOnSpawn = false
+
+    local frame = Instance.new("Frame")
+    frame.Parent = screenGui
+    frame.Size = UDim2.new(0, 200, 0, 300)
+    frame.Position = UDim2.new(0, 10, 0, 10)
+    frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    frame.BorderSizePixel = 0
+
+    local title = Instance.new("TextLabel")
+    title.Parent = frame
+    title.Size = UDim2.new(1, 0, 0, 30)
+    title.Position = UDim2.new(0, 0, 0, 0)
+    title.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.Text = "AutoScript Controls"
+    title.TextSize = 14
+    title.TextAlign = Enum.TextXAlignment.Center
+
+local toggleEspButton = Instance.new("TextButton")
+    toggleEspButton.Parent = frame
+    toggleEspButton.Size = UDim2.new(1, 0, 0, 30)
+    toggleEspButton.Position = UDim2.new(0, 0, 0, 40)
+    toggleEspButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    toggleEspButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    toggleEspButton.Text = "Toggle ESP"
+    toggleEspButton.TextSize = 12
+    toggleEspButton.TextAlign = Enum.TextXAlignment.Center
+    toggleEspButton.MouseButton1Click:Connect(function()
+        espEnabled = not espEnabled
+        if espEnabled then
+            enableESP()
+        else
+            disableESP()
+        end
+    end)
+
+    local toggleAutoFarmButton = Instance.new("TextButton")
+    toggleAutoFarmButton.Parent = frame
+    toggleAutoFarmButton.Size = UDim2.new(1, 0, 0, 30)
+    toggleAutoFarmButton.Position = UDim2.new(0, 0, 0, 80)
+    toggleAutoFarmButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    toggleAutoFarmButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    toggleAutoFarmButton.Text = "Toggle Auto Farm"
+    toggleAutoFarmButton.TextSize = 12
+    toggleAutoFarmButton.TextAlign = Enum.TextXAlignment.Center
+    toggleAutoFarmButton.MouseButton1Click:Connect(function()
+        autoFarmEnabled = not autoFarmEnabled
+    end)
+
+    local toggleSpeedButton = Instance.new("TextButton")
+    toggleSpeedButton.Parent = frame
+    toggleSpeedButton.Size = UDim2.new(1, 0, 0, 30)
+    toggleSpeedButton.Position = UDim2.new(0, 0, 0, 120)
+    toggleSpeedButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    toggleSpeedButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    toggleSpeedButton.Text = "Toggle Speed Hack"
+    toggleSpeedButton.TextSize = 12
+    toggleSpeedButton.TextAlign = Enum.TextXAlignment.Center
+    toggleSpeedButton.MouseButton1Click:Connect(function()
+        speedEnabled = not speedEnabled
+        if speedEnabled then
+            enableSpeedHack()
+        else
+            disableSpeedHack()
+        end
+    end)
+
+local toggleInfiniteJumpButton = Instance.new("TextButton")
+    toggleInfiniteJumpButton.Parent = frame
+    toggleInfiniteJumpButton.Size = UDim2.new(1, 0, 0, 30)
+    toggleInfiniteJumpButton.Position = UDim2.new(0, 0, 0, 200)
+    toggleInfiniteJumpButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    toggleInfiniteJumpButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    toggleInfiniteJumpButton.Text = "Toggle Infinite Jump"
+    toggleInfiniteJumpButton.TextSize = 12
+    toggleInfiniteJumpButton.TextAlign = Enum.TextXAlignment.Center
+    toggleInfiniteJumpButton.MouseButton1Click:Connect(function()
+        infiniteJumpEnabled = not infiniteJumpEnabled
+        if infiniteJumpEnabled then
+            enableInfiniteJump()
+        else
+            disableInfiniteJump()
+        end
+    end)
+
+    local toggleAutoHealButton = Instance.new("TextButton")
+    toggleAutoHealButton.Parent = frame
+    toggleAutoHealButton.Size = UDim2.new(1, 0, 0, 30)
+    toggleAutoHealButton.Position = UDim2.new(0, 0, 0, 240)
+    toggleAutoHealButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    toggleAutoHealButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    toggleAutoHealButton.Text = "Toggle Auto Heal"
+    toggleAutoHealButton.TextSize = 12
+    toggleAutoHealButton.TextAlign = Enum.TextXAlignment.Center
+    toggleAutoHealButton.MouseButton1Click:Connect(function()
+        autoHealEnabled = not autoHealEnabled
+        if autoHealEnabled then
+            enableAutoHeal()
+        else
+            disableAutoHeal()
+        end
+    end)
+end
+
+-- Function to enable and disable ESP
+function enableESP()
+    -- Code for enabling ESP
+end
+
+function disableESP()
+    -- Code for disabling ESP
+end
+
+-- Function to enable and disable Auto Farm
+function enableAutoFarm()
+    -- Code for auto farming
+end
+
+function disableAutoFarm()
+    -- Code for disabling auto farming
+end
+
+-- Function to enable and disable Speed Hack
+function enableSpeedHack()
+    -- Code for enabling speed hack
+end
+
+function disableSpeedHack()
+    -- Code for disabling speed hack
+end
+
+-- Function to enable and disable Noclip
+function enableNoclip()
+    -- Code for enabling noclip
+end
+
+function disableNoclip()
+    -- Code for disabling noclip
+end
+
+-- Function to enable and disable Infinite Jump
+function enableInfiniteJump()
+    -- Code for enabling infinite jump
+end
+
+function disableInfiniteJump()
+    -- Code for disabling infinite jump
+end
+
+-- Function to enable and disable Auto Heal
+function enableAu-- Dead Rails AutoScriptV2
+-- Coded by overlord4me 
+-- Features: Auto Farm, Auto Shop/Sell, Fast Reload/Fire, Auto Heal, Infinite Jump, Speed Hack, Noclip, Full ESP, GUI
+
+-- Initialize variables
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+local camera = game.Workspace.CurrentCamera
+local runService = game:GetService("RunService")
+local tweenService = game:GetService("TweenService")
+local uis = game:GetService("UserInputService")
+local rs = game:GetService("ReplicatedStorage")
+local ts = game:GetService("TweenService")
+local httpService = game:GetService("HttpService")
+local guiEnabled = true
+local espEnabled = true
+local autoFarmEnabled = true
+local speedEnabled = false
+local noclipEnabled = false
+local infiniteJumpEnabled = false
+local fastReloadEnabled = false
+local autoHealEnabled = false
+local esp = {}
+
+-- Create GUI
+local function createGUI()
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = player.PlayerGui
+    screenGui.Name = "AutoScriptGUI"
+    screenGui.ResetOnSpawn = false
+
+    local frame = Instance.new("Frame")
+    frame.Parent = screenGui
+    frame.Size = UDim2.new(0, 200, 0, 300)
+    frame.Position = UDim2.new(0, 10, 0, 10)
+    frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    frame.BorderSizePixel = 0
+
+    local title = Instance.new("TextLabel")
+    title.Parent = frame
+    title.Size = UDim2.new(1, 0, 0, 30)
+    title.Position = UDim2.new(0, 0, 0, 0)
+    title.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.Text = "AutoScript Controls"
+    title.TextSize = 14
+    title.TextAlign = Enum.TextXAlignment.Center
+
+local toggleEspButton = Instance.new("TextButton")
+    toggleEspButton.Parent = frame
+    toggleEspButton.Size = UDim2.new(1, 0, 0, 30)
+    toggleEspButton.Position = UDim2.new(0, 0, 0, 40)
+    toggleEspButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    toggleEspButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    toggleEspButton.Text = "Toggle ESP"
+    toggleEspButton.TextSize = 12
+    toggleEspButton.TextAlign = Enum.TextXAlignment.Center
+    toggleEspButton.MouseButton1Click:Connect(function()
+        espEnabled = not espEnabled
+        if espEnabled then
+            enableESP()
+        else
+            disableESP()
+        end
+    end)
+
+    local toggleAutoFarmButton = Instance.new("TextButton")
+    toggleAutoFarmButton.Parent = frame
+    toggleAutoFarmButton.Size = UDim2.new(1, 0, 0, 30)
+    toggleAutoFarmButton.Position = UDim2.new(0, 0, 0, 80)
+    toggleAutoFarmButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    toggleAutoFarmButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    toggleAutoFarmButton.Text = "Toggle Auto Farm"
+    toggleAutoFarmButton.TextSize = 12
+    toggleAutoFarmButton.TextAlign = Enum.TextXAlignment.Center
+    toggleAutoFarmButton.MouseButton1Click:Connect(function()
+        autoFarmEnabled = not autoFarmEnabled
+    end)
+
+    local toggleSpeedButton = Instance.new("TextButton")
+    toggleSpeedButton.Parent = frame
+    toggleSpeedButton.Size = UDim2.new(1, 0, 0, 30)
+    toggleSpeedButton.Position = UDim2.new(0, 0, 0, 120)
+    toggleSpeedButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    toggleSpeedButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    toggleSpeedButton.Text = "Toggle Speed Hack"
+    toggleSpeedButton.TextSize = 12
+    toggleSpeedButton.TextAlign = Enum.TextXAlignment.Center
+    toggleSpeedButton.MouseButton1Click:Connect(function()
+        speedEnabled = not speedEnabled
+        if speedEnabled then
+            enableSpeedHack()
+        else
+            disableSpeedHack()
+        end
+    end)
+
+local toggleInfiniteJumpButton = Instance.new("TextButton")
+    toggleInfiniteJumpButton.Parent = frame
+    toggleInfiniteJumpButton.Size = UDim2.new(1, 0, 0, 30)
+    toggleInfiniteJumpButton.Position = UDim2.new(0, 0, 0, 200)
+    toggleInfiniteJumpButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    toggleInfiniteJumpButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    toggleInfiniteJumpButton.Text = "Toggle Infinite Jump"
+    toggleInfiniteJumpButton.TextSize = 12
+    toggleInfiniteJumpButton.TextAlign = Enum.TextXAlignment.Center
+    toggleInfiniteJumpButton.MouseButton1Click:Connect(function()
+        infiniteJumpEnabled = not infiniteJumpEnabled
+        if infiniteJumpEnabled then
+            enableInfiniteJump()
+        else
+            disableInfiniteJump()
+        end
+    end)
+
+    local toggleAutoHealButton = Instance.new("TextButton")
+    toggleAutoHealButton.Parent = frame
+    toggleAutoHealButton.Size = UDim2.new(1, 0, 0, 30)
+    toggleAutoHealButton.Position = UDim2.new(0, 0, 0, 240)
+    toggleAutoHealButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    toggleAutoHealButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    toggleAutoHealButton.Text = "Toggle Auto Heal"
+    toggleAutoHealButton.TextSize = 12
+    toggleAutoHealButton.TextAlign = Enum.TextXAlignment.Center
+    toggleAutoHealButton.MouseButton1Click:Connect(function()
+        autoHealEnabled = not autoHealEnabled
+        if autoHealEnabled then
+            enableAutoHeal()
+        else
+            disableAutoHeal()
+        end
+    end)
+end
+
+-- Function to enable and disable ESP
+function enableESP()
+    -- Code for enabling ESP
+end
+
+function disableESP()
+    -- Code for disabling ESP
+end
+
+-- Function to enable and disable Auto Farm
+function enableAutoFarm()
+    -- Code for auto farming
+end
+
+function disableAutoFarm()
+    -- Code for disabling auto farming
+end
+
+-- Function to enable and disable Speed Hack
+function enableSpeedHack()
+    -- Code for enabling speed hack
+end
+
+function disableSpeedHack()
+    -- Code for disabling speed hack
+end
+
+-- Function to enable and disable Noclip
+function enableNoclip()
+    -- Code for enabling noclip
+end
+
+function disableNoclip()
+    -- Code for disabling noclip
+end
+
+-- Function to enable and disable Infinite Jump
+function enableInfiniteJump()
+    -- Code for enabling infinite jump
+end
+
+function disableInfiniteJump()
+    -- Code for disabling infinite jump
+end
+
+-- Function to enable and disable Auto Heal
+function enableAutoHeal()
+    -- Code for enabling auto heal
+end
+
+function disableAutoHeal()
+    -- Code for disabling auto heal
+end
+
+-- Call createGUI function to display the GUI
+createGUI()toHeal()
+    -- Code for enabling auto heal
+end
+
+function disableAutoHeal()
+    -- Code for disabling auto heal
+end
+
+-- Call createGUI function to display the GUI
+createGUI()
